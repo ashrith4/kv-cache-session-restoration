@@ -1,6 +1,6 @@
 # Week 1: Literature Review & Groundwork — Q3 (NVMe Contention Under Agent I/O)
 
-**Author:** Balini Dileep  
+ 
 **Focus:** Research Question 3 (Q3) — Impact of concurrent agent storage traffic on KV cache restore latency  
 
 ---
