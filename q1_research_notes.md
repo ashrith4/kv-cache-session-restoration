@@ -2,9 +2,9 @@
 
 ## 1. Research Scope and Alignment with Kick-Off Context
 
-This document establishes the foundational literature and systems context for **Research Question 1 (Q1)**—formulating and validating a cost model for exact Key-Value (KV) cache restoration from storage—within the broader kick-off framework *"Does data storage matter for agent AI workloads?"* (XINNOR / Deggendorf Institute of Technology, Kirill Krinkin)[cite: 2].
+This document establishes the foundational literature and systems context for **Research Question 1 (Q1)**—formulating and validating a cost model for exact Key-Value (KV) cache restoration from storage—within the broader kick-off framework *"Does data storage matter for agent AI workloads?"* (XINNOR / Deggendorf Institute of Technology, Kirill Krinkin).
 
-In the kick-off taxonomy of agent state tiers, session context corresponds to the attention KV cache of long sessions, scaling with context length and the number of sessions kept restorable[cite: 3, 4]. Across storage tiers—GPU HBM (~100 GB/GPU, TB/s), Host DRAM (~1 TB PCIe, tens of GB/s), Local NVMe (7–14 GB/s per SSD, tens of TB), and Network Storage (200–400 Gb/s, PB shared)—exact restoration from persistent storage competes against recomputing prefill from scratch[cite: 1, 3, 6].
+In the kick-off taxonomy of agent state tiers, session context corresponds to the attention KV cache of long sessions, scaling with context length and the number of sessions kept restorable. Across storage tiers—GPU HBM (~100 GB/GPU, TB/s), Host DRAM (~1 TB PCIe, tens of GB/s), Local NVMe (7–14 GB/s per SSD, tens of TB), and Network Storage (200–400 Gb/s, PB shared)—exact restoration from persistent storage competes against recomputing prefill from scratch.
 
 For Q1 specifically, the objective is to evaluate whether exact restore time from a storage tier can be predicted from a concise set of measured parameters and to identify which execution stage governs each parameter:
 
@@ -18,12 +18,12 @@ where $n$ denotes token length, $\beta$ denotes KV bytes per token, $B_{\text{ef
 
 ### A. Kick-Off Framework & Session Context References
 
-1. **Kick-Off Presentation: *Does data storage matter for agent AI workloads?* (Krinkin, XINNOR / Deggendorf Institute of Technology)**[cite: 2]
-   - **Summary & Findings:** Classifies agent state into long-term agent memory, session context (active and persisted KV cache), and self-improvement artifacts across GPU HBM, host DRAM, local NVMe, and network storage tiers[cite: 3, 4]. Topic `02 LONG-SESSION CONTEXT` frames returning to a long session after minutes or days and comparing KV reload, prefill recomputation, and compression across axes such as context length, reuse fraction, KV bytes per token, and model architectures (e.g., GQA vs. MLA)[cite: 6].
+1. **Kick-Off Presentation: *Does data storage matter for agent AI workloads?* (Krinkin, XINNOR / Deggendorf Institute of Technology)**.
+   - **Summary & Findings:** Classifies agent state into long-term agent memory, session context (active and persisted KV cache), and self-improvement artifacts across GPU HBM, host DRAM, local NVMe, and network storage tiers. Topic `02 LONG-SESSION CONTEXT` frames returning to a long session after minutes or days and comparing KV reload, prefill recomputation, and compression across axes such as context length, reuse fraction, KV bytes per token, and model architectures (e.g., GQA vs. MLA).
    - **Relevance to Q1:** Grounds Q1 within the course/project scope on long-session KV restoration, storage-tier trade-offs, and model KV-footprint variation ($\beta$).
 
-2. **LMCache (`arXiv:2510.09665`) & vLLM Tiered KV Offloading (`vllm.ai` blog, Sep 2026)**[cite: 9]
-   - **Summary & Findings:** LMCache provides an inference-engine cache layer (compatible with engines such as vLLM) with a data plane and control plane for extracting, offloading, and retrieving KV caches across memory and storage tiers (such as CPU memory, local disk, and remote/object storage). Tiered KV offloading architectures examine moving KV blocks across storage hierarchies to reduce Time-to-First-Token (TTFT) and recompute overhead[cite: 9].
+2. **LMCache (`arXiv:2510.09665`) & vLLM Tiered KV Offloading (`vllm.ai` blog, Sep 2026)**.
+   - **Summary & Findings:** LMCache provides an inference-engine cache layer (compatible with engines such as vLLM) with a data plane and control plane for extracting, offloading, and retrieving KV caches across memory and storage tiers (such as CPU memory, local disk, and remote/object storage). Tiered KV offloading architectures examine moving KV blocks across storage hierarchies to reduce Time-to-First-Token (TTFT) and recompute overhead.
    - **Relevance to Q1:** Serves as a primary reference architecture for selecting a pinned cache/offloading layer and separating storage retrieval, transfer, and engine execution stages.
 
 ### B. Q1 Modeling, Bandwidth, Granularity, and Crossover References
