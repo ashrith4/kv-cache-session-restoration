@@ -2,11 +2,11 @@
 
 ## 1. Governance and Weekly Sprint Protocol
 
-- **Duration and Cadence:** 24-week project horizon with one tracked GitHub issue per week and a recurring Friday supervisor review[cite: 8].
+- **Duration and Cadence:** 24-week project horizon with one tracked GitHub issue per week and a recurring Friday supervisor review.
 - **Friday Check-In Format:** Prior to each Friday session, the weekly issue is updated with:
-  1. Completed work and quantitative/empirical results[cite: 8],
-  2. Impediments and technical questions[cite: 8],
-  3. Concrete plan and next issue for the following week[cite: 8].
+  1. Completed work and quantitative/empirical results,
+  2. Impediments and technical questions,
+  3. Concrete plan and next issue for the following week.
 - **Validation Standard:** Fit $T(n) = n \cdot \frac{\beta}{B_{\text{eff}}} + k(n) \cdot \tau_{\text{obj}} + \tau_0$ on the main model, inspect stage breakdowns and residuals, and evaluate predictive accuracy (restore times and break-even behavior) on a second model with a different KV size per token ($\beta$).
 
 ---
